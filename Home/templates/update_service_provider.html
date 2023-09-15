@@ -1,0 +1,16 @@
+{% extends 'nav.html' %}
+{% block content %}
+{% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+    <a href="{% url 'service_provider_page' %}" class="btn btn-lg btn-secondary">Go back</a>
+</form>
+{% endblock content %}

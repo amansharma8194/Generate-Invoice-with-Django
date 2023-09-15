@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" />
+  </head>
+  <body>
+    <div class="container p-5" >
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <form method="post" class="card col-6 mx-auto p-3 m-5">
+        {% csrf_token %} 
+        {% for field in form %}
+        <div class="mb-5">
+          <label class="form-label" for="{{ field.id_for_label }}"
+            >{{ field.label }}</label
+          >
+          {{ field }}
+        </div> 
+        {% endfor %}
+        <span>Don't have account! <a href="/register/">Register</a></span>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+    <script src="{% static 'js.bootstrap.js' %}"></script>
+    <script src="{% static 'js.jquery.js' %}"></script>
+    <script src="{% static 'js.popper.js' %}"></script>
+  </body>
+</html>

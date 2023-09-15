@@ -1,0 +1,51 @@
+{% extends 'nav.html' %}
+{% block content %}
+
+
+<div class="container">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post">
+    {% csrf_token %}
+        {{form.as_p}}
+    <button class="btn btn-primary" type="Submit">Submit</button>
+    </form>
+    <div class="table_container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Company</th>
+          <th scope="col">Handle By</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Client</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in data %}
+        <tr>
+          <td>{{obj.company_name}}</td>
+          <td>{{obj.handle_by}}</td>
+          <td>{{obj.phone}}</td>
+          <td>{{obj.client}}</td>
+          <td>
+            <a href="{% url 'update_service_provider_page' obj.id %}" class="btn btn-success mx-2">Edit</a>
+            <form action="{% url 'delete_service' obj.id %}" method='post'>
+              {% csrf_token %}
+            <button type="submit" class="btn btn-danger mx-2">Delete</a>
+          </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}
+

@@ -1,0 +1,119 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<div class="container my-3">
+    <h1 class="alert alert-info text-center fs-3">Order Details</h1>
+    <div class="row d-flex justify-content-between">
+        <div class="col-5">
+            <h1 class="alert alert-info text-center fs-3">Client Details</h1>
+            <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">ID</th>
+                    <td>{{clientDetails.id}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Company Name</th>
+                    <td>{{clientDetails.company_name}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">GST Number</th>
+                    <td>{{clientDetails.gst_number}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Country</th>
+                    <td>{{clientDetails.country}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">State</th>
+                    <td>{{clientDetails.state}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Address</th>
+                    <td>{{clientDetails.address}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Created At</th>
+                    <td>{{clientDetails.created_at}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="col-5">
+            <h1 class="alert alert-info text-center fs-3">Service Provider Details</h1>
+            <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">ID</th>
+                    <td>{{ServiceProvider.id}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Company Name</th>
+                    <td>{{ServiceProvider.company_name}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Handle By</th>
+                    <td>{{ServiceProvider.handle_by}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Bank Name</th>
+                    <td>{{ServiceProvider.bank_name}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Account No.</th>
+                    <td>{{ServiceProvider.account_number}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">IFSC Code</th>
+                    <td>{{ServiceProvider.ifsc_code}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">GST Number</th>
+                    <td>{{ServiceProvider.gst_number}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Created At</th>
+                    <td>{{ServiceProvider.created_at}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+        </div>
+    </div>
+    <div class="row">
+        <h1 class="alert alert-info text-center fs-3">All Services Details</h1>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Created At</th>
+                <th scope="col">
+                    Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for obj in ServicesData %}
+              <tr>
+                <td scope="row">{{obj.description}}</td>
+                <td>{{obj.quantity}}</td>
+                <td>{{obj.amount}}</td>
+                <td>{{obj.Created_at}}</td>
+                <td>
+                    <div class="row">
+                        <a href="{% url 'update_service_page' obj.id %}" class="col-5 btn btn-primary mx-2">Edit</a>
+                        <form method="post" action="{% url 'delete_service' obj.id %}" class="col-5">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"> Delete </button>
+                        </form>
+                    </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock content %}

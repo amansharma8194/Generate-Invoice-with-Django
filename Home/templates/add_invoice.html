@@ -1,0 +1,37 @@
+{% extends 'nav.html' %}
+{% block content %}
+<div class="container row">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post" class="card col-6 mx-6 p-3" name="ClientForm">
+        <h1 class="col-8 mx-auto">Add Client</h1>
+     
+        {% csrf_token %}
+        {% for field in ClientForm %}
+        <div class="mb-5">
+            <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" name="form_btn" value="client_form_btn">Add Client</button>
+    </form>
+
+
+    <form method="post" class="card col-6 mx-6 p-3" name="ServiceForm">
+        <h1 class="col-8 mx-auto">Add Service</h1>
+        {% csrf_token %}
+        {% for field in ServiceForm %}
+        <div class="mb-5">
+            <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" name="form_btn" value="service_form_btn" >Add Service</button>
+    </form>
+</div>
+{% endblock content %}

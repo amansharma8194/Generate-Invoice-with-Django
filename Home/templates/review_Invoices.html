@@ -1,0 +1,41 @@
+{% extends 'nav.html' %}
+
+
+{% block content %}
+<h1 class="alert alert-info text-center m-5">All Client Details</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Company Name</th>
+        <th scope="col">GST Number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Created At</th>
+        <th scope="col">
+            Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for obj in data %}
+      <tr>
+        <th scope="row">{{obj.id}}</th>
+        <td>{{obj.company_name}}</td>
+        <td>{{obj.gst_number}}</td>
+        <td>{{obj.address}}</td>
+        <td>{{obj.created_at}}</td>
+        <td>
+            <div class="row">
+                <a href="{% url 'review_invoice_page' obj.id %}" class="col-3 btn btn-info mx-2">Show</a>
+                <a href="{% url 'update_client_page' obj.id %}" class="col-3 btn btn-primary mx-2">Edit</a>
+                <form method="post" action="{% url 'delete_client' obj.id %}" class="col-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger"> Delete </button>
+                </form>
+            </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block body %}
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'dashboard_page' %}">Invoice</a>
+      <div class="d-flex">
+        <a class="btn btn-outline-success" href="{% url 'logout_page' %}">LogOut</a>
+      </div>
+    </div>
+  </nav>
+{% block content %}
+
+
+{% endblock content %}
+{% endblock body %}
+
